@@ -1,1 +1,1 @@
-web: Matcher.py
+web: Matcher.py worker: Matcher.py
