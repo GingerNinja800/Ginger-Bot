@@ -106,14 +106,19 @@ def FindKnight(username):
 async def on_message(message):
     if message.content.startswith("!FindKnight"):
         username = message.author.name
-        Knight = FindKnight(username)
-        await discordclient.send_message(message.channel, Knight)
+        try:
+            Knight = FindKnight(username)
+            await discordclient.send_message(message.channel, Knight)
+        except:
+            await discordclient.send_message(message.channel,"Sorry there was an error")
 
     elif message.content.startswith("!FindSquire"):
         username = message.author.name
-        squire = FindSquire(username)
-        await discordclient.send_message(message.channel, squire)
-
+        try:
+            squire = FindSquire(username)
+            await discordclient.send_message(message.channel, squire)
+        except:
+            await discordclient.send_message(message.channel, "Sorry there was an error")
     elif message.content.startswith(">>Help"):
         await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship")
 
