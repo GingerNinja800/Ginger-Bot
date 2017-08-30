@@ -42,18 +42,12 @@ def FindSquire(username):
 
     Canditates = {}
     for Main in KnightMains:
-        for Maa in maadata:
-            Maalist = list(Maa.values())
-            if Main == Maalist[1]:
-                Canditates[Maalist[0]] = Maalist[1:]
-        for Maa in maadata:
-            Maalist = list(Maa.values())
-            if Main == Maalist[2]:
-                Canditates[Maalist[0]] = Maalist[1:]
-        for Maa in maadata:
-            Maalist = list(Maa.values())
-            if Main == Maalist[3]:
-                Canditates[Maalist[0]] = Maalist[1:]
+        for loop in range(1,4):
+            for Maa in maadata:
+                Maalist = list(Maa.values())
+                if Main == Maalist[loop]:
+                    Canditates[Maalist[0]] = Maalist[1:]
+
 
     Matches = {}
     for Canditate in Canditates:
