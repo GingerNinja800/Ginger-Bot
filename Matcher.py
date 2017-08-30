@@ -35,6 +35,7 @@ def FindSquire(username):
     for bit in knightdata[KnightPos]:
         if "Main" in bit:
             KnightMains.append(knightdata[KnightPos][bit])
+    print(KnightMains)
     while '' in KnightMains:
         KnightMains.remove('')
 
@@ -43,12 +44,11 @@ def FindSquire(username):
     Canditates = {}
     for Main in KnightMains:
         counter = 1
-        if len(Canditates) == 0:
-            for Maa in maadata:
-                Maalist = list(Maa.values())
-                if Main == Maalist[counter]:
-                    Canditates[Maalist[0]] = Maalist[1:]
-            counter += 1
+        for Maa in maadata:
+            Maalist = list(Maa.values())
+            if Main == Maalist[counter]:
+                Canditates[Maalist[0]] = Maalist[1:]
+        counter += 1
 
     Matches = {}
     for Canditate in Canditates:
