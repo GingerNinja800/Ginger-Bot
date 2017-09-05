@@ -99,7 +99,29 @@ def FindKnight(username):
 
     return(KnightTeacher)
 
-
+def AddToSheet(name,role):
+    scope = ["https://spreadsheets.google.com/feeds"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
+    client = gspread.authorize(creds)
+    knightsheet = client.open("DawnPC Knights").sheet1
+    maasheet = client.open("DawnPC Man At Arms").sheet1
+    if role == "Man At Arms":
+        try:
+            cell = maasheet.find(name)
+            return "1"
+        except:
+            TotalRowCount = (maasheet.row_count) + 1
+            maasheet.insert_row("", index=TotalRowCount)
+            maasheet.update_cell(TotalRowCount, 1, name)
+    elif role == "Knight":
+        try:
+            cell = knightsheet.find(name)
+            return
+        except:
+            TotalRowCount = (knightsheet.row_count)+1
+            knightsheet.insert_row("",index=TotalRowCount)
+            knightsheet.update_cell(TotalRowCount,1,name)
+            return "1"
 
 @discordclient.event
 async def on_message(message):
@@ -121,6 +143,17 @@ async def on_message(message):
     elif message.content.startswith(">>Help"):
         await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship")
 
-
+     elif message.content.startswith("!AddToSpreadsheet"):
+        username = message.author.name +"#"+message.author.discriminator
+        ManAtArms = discord.utils.get(message.author.roles,name="Man At Arms")
+        ManAtArms = str(ManAtArms)
+        Knight = discord.utils.get(message.author.roles,name="Knight")
+        Knight = str(Knight)
+        if ManAtArms != "None":
+            none = AddToSheet(username,ManAtArms)
+        elif Knight != "None":
+            none = AddToSheet(username,Knight)
+        if none == None:
+            await discordclient.send_message(message.channel, "YOU'RE ALREADY THERE YA DIP. (Or Ginger is a Dip if you aren't)")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
