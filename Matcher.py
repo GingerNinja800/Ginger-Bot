@@ -86,7 +86,7 @@ def FindKnight(username):
             for Knight in knightdata:
                 Knight = list(Knight.values())
                 if Knight[1] == "TRUE":
-                    if Main == Knight[counter]:
+                    if Main == Knight[loop]:
                         Canditates[Knight[0]] = Knight[2:]
             
 
