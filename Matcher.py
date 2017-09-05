@@ -107,11 +107,12 @@ def AddToSheet(name,role):
     if role == "Man At Arms":
         try:
             cell = maasheet.find(name)
-            return "1"
+            return
         except:
             TotalRowCount = (maasheet.row_count) + 1
             maasheet.insert_row("", index=TotalRowCount)
             maasheet.update_cell(TotalRowCount, 1, name)
+            return "1"
     elif role == "Knight":
         try:
             cell = knightsheet.find(name)
@@ -125,8 +126,8 @@ def AddToSheet(name,role):
 @discordclient.event
 async def on_message(message):
     if message.author.name != "Ginger Bot":
+    	username = message.author.name
         if message.content.startswith("!FindKnight"):
-            username = message.author.name
             try:
                 Knight = FindKnight(username)
                 await discordclient.send_message(message.channel, Knight)
@@ -134,7 +135,6 @@ async def on_message(message):
                 await discordclient.send_message(message.channel,"Sorry there was an error")
 
         elif message.content.startswith("!FindSquire"):
-            username = message.author.name
             try:
                 squire = FindSquire(username)
                 await discordclient.send_message(message.channel, squire)
@@ -144,7 +144,7 @@ async def on_message(message):
             await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddMe : Adds you to the relevant spreadsheet")
 
         elif message.content.startswith("!AddMe"):
-            username = message.author.name +"#"+message.author.discriminator
+            username += "#"+message.author.discriminator
             ManAtArms = discord.utils.get(message.author.roles,name="Man At Arms")
             ManAtArms = str(ManAtArms)
             Knight = discord.utils.get(message.author.roles,name="Knight")
