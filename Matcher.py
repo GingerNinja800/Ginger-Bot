@@ -142,9 +142,9 @@ async def on_message(message):
             except:
                 await discordclient.send_message(message.channel, "Sorry there was an error")
         elif message.content.startswith(">>Help"):
-            await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddToSpreadsheet : Adds you to the relevant spreadsheet")
+            await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddMe : Adds you to the relevant spreadsheet")
 
-        elif message.content.startswith("!AddToSpreadsheet"):
+        elif message.content.startswith("!AddMe"):
             username = message.author.name +"#"+message.author.discriminator
             ManAtArms = discord.utils.get(message.author.roles,name="Man At Arms")
             ManAtArms = str(ManAtArms)
