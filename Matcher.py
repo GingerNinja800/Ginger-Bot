@@ -107,11 +107,12 @@ def AddToSheet(name,role):
     if role == "Man At Arms":
         try:
             cell = maasheet.find(name)
-            return "1"
+            return
         except:
             TotalRowCount = (maasheet.row_count) + 1
             maasheet.insert_row("", index=TotalRowCount)
             maasheet.update_cell(TotalRowCount, 1, name)
+            return "1"
     elif role == "Knight":
         try:
             cell = knightsheet.find(name)
