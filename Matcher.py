@@ -82,14 +82,13 @@ def FindKnight(username):
 
     Canditates = {}
     for Main in maaMains:
-        counter = 2
-        if len(Canditates) == 0:
+        for loop in range(1,5):
             for Knight in knightdata:
                 Knight = list(Knight.values())
                 if Knight[1] == "TRUE":
                     if Main == Knight[counter]:
                         Canditates[Knight[0]] = Knight[2:]
-            counter += 1
+            
 
     Matches = {}
     for canditate in Canditates:
