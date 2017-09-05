@@ -156,5 +156,7 @@ async def on_message(message):
                 none = AddToSheet(username,Knight)
             if none == None:
                 await discordclient.send_message(message.channel, "YOU'RE ALREADY THERE YA DIP. (Or Ginger is a Dip if you aren't)")
+            else:
+                await discordclient.send_message(message.channel,"Success!")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
