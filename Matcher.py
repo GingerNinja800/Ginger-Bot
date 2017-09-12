@@ -16,14 +16,16 @@ async def on_ready():
     print("-------")
     await discordclient.change_presence(game=discord.Game(name="Type >>Help"))
 
-
-def FindSquire(username):
+def AccessSheet():
     scope = ["https://spreadsheets.google.com/feeds"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
     client = gspread.authorize(creds)
     knightsheet = client.open("DawnPC Knights").sheet1
     maasheet = client.open("DawnPC Man At Arms").sheet1
+    return knightsheet, maasheet
 
+def FindSquire(username):
+    knightsheet, maasheet = AccessSheet()
     knightdata = knightsheet.get_all_records()
     maadata = maasheet.get_all_records()
 
@@ -37,8 +39,6 @@ def FindSquire(username):
             KnightMains.append(knightdata[KnightPos][bit])
     while '' in KnightMains:
         KnightMains.remove('')
-
-
 
     Canditates = {}
     for Main in KnightMains:
@@ -60,12 +60,7 @@ def FindSquire(username):
 
 
 def FindKnight(username):
-    scope = ["https://spreadsheets.google.com/feeds"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
-    client = gspread.authorize(creds)
-    knightsheet = client.open("DawnPC Knights").sheet1
-    maasheet = client.open("DawnPC Man At Arms").sheet1
-
+    knightsheet, maasheet = AccessSheet()
     knightdata = knightsheet.get_all_records()
     maadata = maasheet.get_all_records()
 
@@ -99,11 +94,7 @@ def FindKnight(username):
     return(KnightTeacher)
 
 def AddToSheet(name,role):
-    scope = ["https://spreadsheets.google.com/feeds"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
-    client = gspread.authorize(creds)
-    knightsheet = client.open("DawnPC Knights").sheet1
-    maasheet = client.open("DawnPC Man At Arms").sheet1
+    knightsheet, maasheet = AccessSheet()
     if role == "Man At Arms":
         try:
             cell = maasheet.find(name)
