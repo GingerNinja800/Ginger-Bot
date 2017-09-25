@@ -93,25 +93,91 @@ def FindKnight(username):
 
     return(KnightTeacher)
 
-def AddToSheet(name,role):
-    knightsheet, maasheet = AccessSheet()
+def AddToSheet(name, role, discrim, mains):
+    scope = ["https://spreadsheets.google.com/feeds"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
+    client = gspread.authorize(creds)
+    knightsheet = client.open("DawnPC Knights").sheet1
+    maasheet = client.open("DawnPC Man At Arms").sheet1
     if role == "Man At Arms":
         try:
-            cell = maasheet.find(name)
-            return
+            if len(mains) > 1:
+                ColA = maasheet.col_values(1)
+                ColA.remove(ColA[0])
+                for cell in ColA:
+                    cell2 = cell.split("#")
+                    if discrim in cell2[1]:
+                        Row = ColA.index(cell)
+                        Row += 2
+                        break
+             
+                counter = 0
+                maasheet.update_cell(Row,1,name)
+                for cell in range(2,5):
+                    maasheet.update_cell(Row,cell,mains[counter])
+                    counter += 1
+                return "1"
+            else:
+                ColA = maasheet.col_values(1)
+                ColA.remove(ColA[0])
+                for cell in ColA:
+                    cell2 = cell.split("#")
+                    if discrim in cell2[1]:
+                        Row = ColA.index(cell)
+                        Row += 2
+                        break
+                return
+
         except:
             TotalRowCount = (maasheet.row_count) + 1
             maasheet.insert_row("", index=TotalRowCount)
             maasheet.update_cell(TotalRowCount, 1, name)
+            counter = 0
+            for cell in range(2,5):
+                maasheet.update_cell(TotalRowCount,cell,mains[counter])
+                counter += 1
+            return "1"
+
     elif role == "Knight":
         try:
-            cell = knightsheet.find(name)
-            return
+            if len(mains) > 1:
+                ColA = knightsheet.col_values(1)
+                ColA.remove(ColA[0])
+                for cell in ColA:
+                    cell2 = cell.split("#")
+                    if discrim in cell2[1]:
+                        Row = ColA.index(cell)
+                        Row += 2
+                        break
+              
+                counter = 0
+                knightsheet.update_cell(Row,1,name)
+                for cell in range(2,6):
+                    knightsheet.update_cell(Row,cell,mains[counter])
+                    counter += 1
+                return "1"
+            else:
+                ColA = knightsheet.col_values(1)
+                ColA.remove(ColA[0])
+                for cell in ColA:
+                    cell2 = cell.split("#")
+                    if discrim in cell2[1]:
+                        Row = ColA.index(cell)
+                        Row += 2
+                        break
+                return
+
         except:
-            TotalRowCount = (knightsheet.row_count)+1
-            knightsheet.insert_row("",index=TotalRowCount)
-            knightsheet.update_cell(TotalRowCount,1,name)
+            TotalRowCount = (knightsheet.row_count) + 1
+            knightsheet.insert_row("", index=TotalRowCount)
+            knightsheet.update_cell(TotalRowCount, 1, name)
+            counter = 0
+            for cell in range(2,6):
+                knightsheet.update_cell(TotalRowCount,cell,mains[counter])
+                counter += 1
             return "1"
+    else:
+        return
 
 @discordclient.event
 async def on_message(message):
@@ -133,20 +199,24 @@ async def on_message(message):
         elif message.content.startswith(">>Help"):
             await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddMe : Adds you to the relevant spreadsheet")
 
-        elif message.content.startswith("!AddMe"):
-            username += "#"+message.author.discriminator
-            ManAtArms = discord.utils.get(message.author.roles,name="Man At Arms")
+         elif message.content.startswith("!AddMe"):
+            username += "#" + message.author.discriminator
+            discrim = message.author.discriminator
+            ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
             ManAtArms = str(ManAtArms)
-            Knight = discord.utils.get(message.author.roles,name="Knight")
+            Knight = discord.utils.get(message.author.roles, name="Knight")
             Knight = str(Knight)
+            mains = message.content.split(" ")
+            mains.remove(mains[0])
+
             if ManAtArms != "None":
-                none = AddToSheet(username,ManAtArms)
+                none = AddToSheet(username, ManAtArms, discrim,mains)
             elif Knight != "None":
-                none = AddToSheet(username,Knight)
+                none = AddToSheet(username, Knight, discrim,mains)
             if none == None:
-                await discordclient.send_message(message.channel, "YOU'RE ALREADY THERE YA DIP. (Or Ginger is a Dip if you aren't)")
+                await discordclient.send_message(message.channel, "You're already in the spreadsheet.")
             else:
-                await discordclient.send_message(message.channel,"Success!")
+                await discordclient.send_message(message.channel, "Success!")
         
         elif message.content.startswith("!PromoteMe"):
            joindate = str(message.author.joined_at).split(" ")[0]
