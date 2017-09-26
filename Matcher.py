@@ -259,7 +259,7 @@ async def on_message(message):
            
            joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
            difference = todaydate - joindate
-           if difference >= 7:
+           if int(difference) >= 7:
                await discordclient.remove_roles(message.author, discord.utils.get(message.server.roles, name="Recruit"))
                await discordclient.add_roles(message.author, discord.utils.get(message.server.roles, name="Man At Arms"))
                await discordclient.send_message(message.channel,"Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
