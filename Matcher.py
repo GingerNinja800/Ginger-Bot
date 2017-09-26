@@ -224,16 +224,16 @@ async def on_message(message):
            validated = []
            for pos in range(len(mains)):
                if (mains[pos].title() in AcceptMains) or (mains[pos] in "N/A"):
-                    if main[pos] in AcceptMains[:1]:
+                    if mains[pos] in AcceptMains[:1]:
                         if validated[0] not in AcceptMains[:1]:
-                            validated.append(main[pos])
+                            validated.append(mains[pos])
                         
-                    elif main[pos] in AcceptMains[2:]:
+                    elif mains[pos] in AcceptMains[2:]:
                         if len(validated) >= 1:
-                            validated.append(main[pos])
+                            validated.append(mains[pos])
                         else:
                             validated.append("")
-                            validated.append(main[pos])
+                            validated.append(mains[pos])
                     else:
                         validated.append("")
                         
