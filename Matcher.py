@@ -167,7 +167,8 @@ def AddToSheet(name, role, discrim, mains):
                         Row = ColA.index(cell)
                         Row += 2
                         break
-                return "1"
+                print(row)
+                return
 
         except:
             TotalRowCount = (knightsheet.row_count) + 1
