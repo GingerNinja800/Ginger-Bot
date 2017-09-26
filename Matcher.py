@@ -101,7 +101,7 @@ def AddToSheet(name, role, discrim, mains):
     maasheet = client.open("DawnPC Man At Arms").sheet1
     if role == "Man At Arms":
         try:
-            if len(mains) > 1:
+            if len(mains) > 0:
                 ColA = maasheet.col_values(1)
                 ColA.remove(ColA[0])
                 for cell in ColA:
@@ -141,7 +141,7 @@ def AddToSheet(name, role, discrim, mains):
 
     elif role == "Knight":
         try:
-            if len(mains) > 1:
+            if len(mains) > 0:
                 ColA = knightsheet.col_values(1)
                 ColA.remove(ColA[0])
                 for cell in ColA:
