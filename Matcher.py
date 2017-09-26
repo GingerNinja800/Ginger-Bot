@@ -154,7 +154,8 @@ def AddToSheet(name, role, discrim, mains):
                 knightsheet.update_cell(Row,1,name)
                 for cell in range(2,6):
                     knightsheet.update_cell(Row,cell,mains[counter])
-                    counter += 1
+                    if counter != len(mains):
+                        counter += 1
                 return "1"
             else:
                 ColA = knightsheet.col_values(1)
