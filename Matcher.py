@@ -230,7 +230,7 @@ async def on_message(message):
                    elif main in AcceptMains:
                        break
                    else:   
-                       pos = mains.index(main)
+                       pos = mains.index(main)-1
                        mains.remove(mains[pos])
           
 
