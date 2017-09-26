@@ -211,7 +211,7 @@ async def on_message(message):
         elif message.content.startswith(">>Help"):
             await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddMe : Adds you to the relevant spreadsheet")
 
-        elif message.content.startswith("!somethingelse"):
+        elif message.content.startswith("!AddMe"):
            username += "#" + message.author.discriminator
            discrim = message.author.discriminator
            AcceptMains = ["Warden","Conqueror","Peacekeeper","Lawbringer","Centurion","Gladiator","Raider","Warlord","Berzerker","Valkyrie","Highlander","Kensei","Shugoki","Orochi","Nobushi","Shinobi"]
