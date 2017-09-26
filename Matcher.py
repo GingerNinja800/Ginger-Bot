@@ -175,7 +175,8 @@ def AddToSheet(name, role, discrim, mains):
             counter = 0
             for cell in range(2,6):
                 knightsheet.update_cell(TotalRowCount,cell,mains[counter])
-                counter += 1
+                if counter != len(mains):
+                    counter += 1
             return "1"
     else:
         return
