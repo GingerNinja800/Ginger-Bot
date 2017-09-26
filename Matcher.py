@@ -199,24 +199,24 @@ async def on_message(message):
         elif message.content.startswith(">>Help"):
             await discordclient.send_message(message.channel, "!FindSquire : Suggests the most worthy MaA for your knightliness\n!FindKnight : Suggests the most suitable knight for your squireship\n!AddMe : Adds you to the relevant spreadsheet")
 
-         elif message.content.startswith("!AddMe"):
-            username += "#" + message.author.discriminator
-            discrim = message.author.discriminator
-            ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
-            ManAtArms = str(ManAtArms)
-            Knight = discord.utils.get(message.author.roles, name="Knight")
-            Knight = str(Knight)
-            mains = message.content.split(" ")
-            mains.remove(mains[0])
+        elif message.content.startswith("!AddMe"):
+           username += "#" + message.author.discriminator
+           discrim = message.author.discriminator
+           ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
+           ManAtArms = str(ManAtArms)
+           Knight = discord.utils.get(message.author.roles, name="Knight")
+           Knight = str(Knight)
+           mains = message.content.split(" ")
+           mains.remove(mains[0])
 
-            if ManAtArms != "None":
-                none = AddToSheet(username, ManAtArms, discrim,mains)
-            elif Knight != "None":
-                none = AddToSheet(username, Knight, discrim,mains)
-            if none == None:
-                await discordclient.send_message(message.channel, "You're already in the spreadsheet.")
-            else:
-                await discordclient.send_message(message.channel, "Success!")
+           if ManAtArms != "None":
+               none = AddToSheet(username, ManAtArms, discrim,mains)
+           elif Knight != "None":
+               none = AddToSheet(username, Knight, discrim,mains)
+           if none == None:
+               await discordclient.send_message(message.channel, "You're already in the spreadsheet.")
+           else:
+               await discordclient.send_message(message.channel, "Success!")
         
         elif message.content.startswith("!PromoteMe"):
            joindate = str(message.author.joined_at).split(" ")[0]
