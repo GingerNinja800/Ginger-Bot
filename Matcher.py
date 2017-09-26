@@ -130,14 +130,19 @@ def AddToSheet(name, role, discrim, mains):
                 return
 
         except:
-            TotalRowCount = (maasheet.row_count) + 1
-            maasheet.insert_row("", index=TotalRowCount)
-            maasheet.update_cell(TotalRowCount, 1, name)
-            counter = 0
-            for cell in range(2,2+len(mains)):
-                maasheet.update_cell(TotalRowCount,cell,mains[counter])
-                counter += 1
-            return "1"
+            if len(mains) > 0:
+                TotalRowCount = (maasheet.row_count) + 1
+                maasheet.insert_row("", index=TotalRowCount)
+                maasheet.update_cell(TotalRowCount, 1, name)
+                counter = 0
+                for cell in range(2,2+len(mains)):
+                    maasheet.update_cell(TotalRowCount,cell,mains[counter])
+                    counter += 1
+                return "1"
+            else:
+                TotalRowCount = (maasheet.row_count) + 1
+                maasheet.insert_row("", index=TotalRowCount)
+                maasheet.update_cell(TotalRowCount, 1, name)    
 
     elif role == "Knight":
         try:
