@@ -224,7 +224,8 @@ async def on_message(message):
            
            for pos in range(len(mains)):
                if (mains[pos].title() not in AcceptMains) and (mains[pos] not in "N/A"):
-                    mains[pos].replace(mains[pos],"")
+                    mains[pos] == ""
+                                 
 
            if ManAtArms != "None":
                none = AddToSheet(username, ManAtArms, discrim,mains)
@@ -237,10 +238,9 @@ async def on_message(message):
         
         elif message.content.startswith("!PromoteMe"):
            joindate = message.author.joined_at).split(" ")[0]
-           todaydate = str(datetime.date.today())
+           todaydate = datetime.date.today()
            JoinDate2 = joindate
            joindate = joindate.split("-")
-           todaydate = todaydate.split("-")
            joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
            difference = todaydate - joindate
            if difference >= 7:
