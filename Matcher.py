@@ -222,9 +222,10 @@ async def on_message(message):
            mains = message.content.split(" ")
            mains.remove(mains[0])
            
-           for pos in range(len(mains)):
+           for pos in range(len(mains)+1):
                if (mains[pos].title() not in AcceptMains) and (mains[pos] not in "N/A"):
                     mains.remove(mains[pos])
+                    pos -= 1
 
                         
           
