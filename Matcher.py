@@ -237,7 +237,7 @@ async def on_message(message):
                await discordclient.send_message(message.channel, "Success!")
         
         elif message.content.startswith("!PromoteMe"):
-           joindate = message.author.joined_at).split(" ")[0]
+           joindate = message.author.joined_at.split(" ")[0]
            todaydate = datetime.date.today()
            JoinDate2 = joindate
            joindate = joindate.split("-")
