@@ -224,9 +224,23 @@ async def on_message(message):
            validated = []
            for pos in range(len(mains)):
                if (mains[pos].title() in AcceptMains) or (mains[pos] in "N/A"):
-                    validated.append(mains[pos])      
+                    if main[pos] in AcceptMains[:1]:
+                        if validated[0] not in AcceptMains[:1]:
+                            validated.append(main[pos])
+                        
+                    elif main[pos] in AcceptMains[2:]):
+                        if len(validated) >= 1:
+                            validated.append(main[pos])
+                        else:
+                            validated.append("")
+                            validated.append(main[pos])
+                    else:
+                        validated.append("")
+                        
+                         
            mains = validated
-                                 
+           
+           
 
            if ManAtArms != "None":
                none = AddToSheet(username, ManAtArms, discrim,mains)
@@ -240,7 +254,9 @@ async def on_message(message):
         elif message.content.startswith("!PromoteMe"):
            joindate = str(message.author.joined_at).split(" ")[0]
            todaydate = datetime.date.today()
+           JoinDate2 = joindate
            joindate = joindate.split("-")
+           
            joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
            difference = todaydate - joindate
            if difference >= 7:
@@ -248,6 +264,6 @@ async def on_message(message):
                await discordclient.add_roles(message.author, discord.utils.get(message.server.roles, name="Man At Arms"))
                await discordclient.send_message(message.channel,"Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
            else:
-               await discordclient.send_message(message.channel,"You joined "+JoinDate2+". You must wait "+str(7-difference)+" days before you can become a Man At Arms. #SorryNotSorry")
+               await discordclient.send_message(message.channel,"You joined "+JoinDate2+". You must wait "+difference+" days before you can become a Man At Arms. #SorryNotSorry")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
