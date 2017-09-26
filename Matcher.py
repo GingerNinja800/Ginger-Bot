@@ -94,11 +94,7 @@ def FindKnight(username):
     return(KnightTeacher)
 
 def AddToSheet(name, role, discrim, mains):
-    scope = ["https://spreadsheets.google.com/feeds"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
-    client = gspread.authorize(creds)
-    knightsheet = client.open("DawnPC Knights").sheet1
-    maasheet = client.open("DawnPC Man At Arms").sheet1
+    knightsheet, maasheet = AccessSheet()
     if role == "Man At Arms":
         try:
             if len(mains) > 0:
