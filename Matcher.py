@@ -221,10 +221,11 @@ async def on_message(message):
            Knight = str(Knight)
            mains = message.content.split(" ")
            mains.remove(mains[0])
-           
+           validated = []
            for pos in range(len(mains)):
-               if (mains[pos].title() not in AcceptMains) and (mains[pos] not in "N/A"):
-                    mains[pos] = ""
+               if (mains[pos].title() in AcceptMains) and (mains[pos] in "N/A"):
+                    validated.append(mains[pos])      
+           mains = validated
                                  
 
            if ManAtArms != "None":
@@ -237,9 +238,8 @@ async def on_message(message):
                await discordclient.send_message(message.channel, "Success!")
         
         elif message.content.startswith("!PromoteMe"):
-           joindate = message.author.joined_at.split(" ")[0]
+           joindate = str(message.author.joined_at).split(" ")[0]
            todaydate = datetime.date.today()
-           JoinDate2 = joindate
            joindate = joindate.split("-")
            joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
            difference = todaydate - joindate
