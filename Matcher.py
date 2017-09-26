@@ -225,7 +225,7 @@ async def on_message(message):
                for main in mains:
                    if main.title() in ["True","False"]:
                        break
-                   elif main not in "N/A":
+                   elif main in "N/A":
                        break
                    elif main in AcceptMains:
                        break
