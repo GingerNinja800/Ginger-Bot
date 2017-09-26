@@ -212,11 +212,12 @@ async def on_message(message):
            Knight = str(Knight)
            mains = message.content.split(" ")
            mains.remove(mains[0])
-           for main in mains:
+           '''
+            for main in mains:
                 if main not in AcceptMains or (main.title() not in ["True","False"] and main not in ["N/A"]):
                     pos = mains.index(main)
                     mains.remove(mains[pos])
-                    
+           '''         
 
            if ManAtArms != "None":
                none = AddToSheet(username, ManAtArms, discrim,mains)
