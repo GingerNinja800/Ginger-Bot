@@ -224,11 +224,11 @@ async def on_message(message):
            if len(mains) > 0:
                for main in mains:
                    if main.title() in ["True","False"]:
-                       break
+                       pass
                    elif main in "N/A":
-                       break
+                       pass
                    elif main in AcceptMains:
-                       break
+                       pass
                    else:   
                        pos = mains.index(main)-1
                        mains.remove(mains[pos])
