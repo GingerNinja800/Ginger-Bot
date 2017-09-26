@@ -229,10 +229,9 @@ async def on_message(message):
                        BadMains.append(mains[pos])
               
                if len(BadMains) > 0:
-                    for main in mains:
-                        for badmain in badmains:
-                            if badmain == main:
-                                mains.remove[mains[main]
+                    for BadMain in BadMains:
+                        if BadMain in mains:
+                            mains.remove(mains[BadMain])
                         
           
 
