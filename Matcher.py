@@ -142,7 +142,8 @@ def AddToSheet(name, role, discrim, mains):
             else:
                 TotalRowCount = (maasheet.row_count) + 1
                 maasheet.insert_row("", index=TotalRowCount)
-                maasheet.update_cell(TotalRowCount, 1, name)    
+                maasheet.update_cell(TotalRowCount, 1, name)
+                return "1"
 
     elif role == "Knight":
         try:
@@ -190,6 +191,7 @@ def AddToSheet(name, role, discrim, mains):
                 TotalRowCount = (knightsheet.row_count) + 1
                 knightsheet.insert_row("", index=TotalRowCount)
                 knightsheet.update_cell(TotalRowCount, 1, name)
+                return "1"
     else:
         return
 
