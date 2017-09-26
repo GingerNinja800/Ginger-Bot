@@ -214,7 +214,7 @@ async def on_message(message):
         elif message.content.startswith("!AddMe"):
            username += "#" + message.author.discriminator
            discrim = message.author.discriminator
-           AcceptMains = ["Warden","Conqueror","Peacekeeper","Lawbringer","Centurion","Gladiator","Raider","Warlord","Berzerker","Valkyrie","Highlander","Kensei","Shugoki","Orochi","Nobushi","Shinobi"]
+           AcceptMains = ["True","False","Warden","Conqueror","Peacekeeper","Lawbringer","Centurion","Gladiator","Raider","Warlord","Berzerker","Valkyrie","Highlander","Kensei","Shugoki","Orochi","Nobushi","Shinobi"]
            ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
            ManAtArms = str(ManAtArms)
            Knight = discord.utils.get(message.author.roles, name="Knight")
@@ -223,11 +223,9 @@ async def on_message(message):
            mains.remove(mains[0])
            if len(mains) > 0:
                for main in mains:
-                   if main.title() in ["True","False"]:
+                   if main.title() in AcceptMains:
                        pass
                    elif main in "N/A":
-                       pass
-                   elif main in AcceptMains:
                        pass
                    else:   
                        pos = mains.index(main)-1
