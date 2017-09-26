@@ -171,15 +171,20 @@ def AddToSheet(name, role, discrim, mains):
                 return
 
         except:
-            TotalRowCount = (knightsheet.row_count) + 1
-            knightsheet.insert_row("", index=TotalRowCount)
-            knightsheet.update_cell(TotalRowCount, 1, name)
-            counter = 0
-            for cell in range(2,2+len(mains)):
-                knightsheet.update_cell(TotalRowCount,cell,mains[counter])
-                if counter != len(mains):
-                    counter += 1
-            return "1"
+            if len(mains) > 0:
+                TotalRowCount = (knightsheet.row_count) + 1
+                knightsheet.insert_row("", index=TotalRowCount)
+                knightsheet.update_cell(TotalRowCount, 1, name)
+                counter = 0
+                for cell in range(2,2+len(mains)):
+                    knightsheet.update_cell(TotalRowCount,cell,mains[counter])
+                    if counter != len(mains):
+                        counter += 1
+                return "1"
+            else:
+                TotalRowCount = (knightsheet.row_count) + 1
+                knightsheet.insert_row("", index=TotalRowCount)
+                knightsheet.update_cell(TotalRowCount, 1, name)
     else:
         return
 
