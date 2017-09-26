@@ -223,11 +223,7 @@ async def on_message(message):
            mains.remove(mains[0])
            if len(mains) > 0:
                for main in mains:
-                   if main.title() in AcceptMains:
-                       pass
-                   elif main in "N/A":
-                       pass
-                   else:   
+                   if (main.title() not in AcceptMains) and (main not in "N/A"):
                        pos = mains.index(main)-1
                        mains.remove(mains[pos])
           
