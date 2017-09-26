@@ -223,7 +223,7 @@ async def on_message(message):
            mains.remove(mains[0])
            validated = []
            for pos in range(len(mains)):
-               if (mains[pos].title() in AcceptMains) and (mains[pos] in "N/A"):
+               if (mains[pos].title() in AcceptMains) or (mains[pos] in "N/A"):
                     validated.append(mains[pos])      
            mains = validated
                                  
