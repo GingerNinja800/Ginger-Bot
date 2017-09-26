@@ -236,16 +236,18 @@ async def on_message(message):
                await discordclient.send_message(message.channel, "Success!")
         
         elif message.content.startswith("!PromoteMe"):
-           joindate = str(message.author.joined_at).split(" ")[0]
+           joindate = message.author.joined_at).split(" ")[0]
            todaydate = str(datetime.date.today())
            JoinDate2 = joindate
            joindate = joindate.split("-")
            todaydate = todaydate.split("-")
-           difference = int(todaydate[2]) - int(joindate[2])
+           joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
+           difference = todaydate - joindate
+           
             
            if str(discord.utils.get(message.author.roles, name = "Recruit")) != "None":
                if joindate[0] == todaydate[0]:
-                   if joindate[1] == todaydate[1]:
+                   if joindate[1] == todaydate[1] and :
                        if difference >= 7:
                            await discordclient.remove_roles(message.author, discord.utils.get(message.server.roles, name="Recruit"))
                            await discordclient.add_roles(message.author, discord.utils.get(message.server.roles, name="Man At Arms"))
