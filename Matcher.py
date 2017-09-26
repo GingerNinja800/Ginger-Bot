@@ -224,8 +224,8 @@ async def on_message(message):
            
            for pos in range(len(mains)):
                if (mains[pos].title() not in AcceptMains) and (mains[pos] not in "N/A"):
-                    mains.remove(mains[pos])
-                    pos -= 1
+                    mains.replace(mains[pos],"")
+        
 
                         
           
