@@ -228,7 +228,7 @@ async def on_message(message):
                         if validated[0] not in AcceptMains[:1]:
                             validated.append(main[pos])
                         
-                    elif main[pos] in AcceptMains[2:]):
+                    elif main[pos] in AcceptMains[2:]:
                         if len(validated) >= 1:
                             validated.append(main[pos])
                         else:
