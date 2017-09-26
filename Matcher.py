@@ -113,9 +113,10 @@ def AddToSheet(name, role, discrim, mains):
              
                 counter = 0
                 maasheet.update_cell(Row,1,name)
-                for cell in range(2,5):
+                for cell in range(2,2+len(mains)):
                     maasheet.update_cell(Row,cell,mains[counter])
-                    counter += 1
+                    if counter != len(mains):
+                        counter += 1
                 return "1"
             else:
                 ColA = maasheet.col_values(1)
@@ -133,7 +134,7 @@ def AddToSheet(name, role, discrim, mains):
             maasheet.insert_row("", index=TotalRowCount)
             maasheet.update_cell(TotalRowCount, 1, name)
             counter = 0
-            for cell in range(2,5):
+            for cell in range(2,2+len(mains)):
                 maasheet.update_cell(TotalRowCount,cell,mains[counter])
                 counter += 1
             return "1"
@@ -152,7 +153,7 @@ def AddToSheet(name, role, discrim, mains):
               
                 counter = 0
                 knightsheet.update_cell(Row,1,name)
-                for cell in range(2,6):
+                for cell in range(2,2+len(mains)):
                     knightsheet.update_cell(Row,cell,mains[counter])
                     if counter != len(mains):
                         counter += 1
@@ -173,7 +174,7 @@ def AddToSheet(name, role, discrim, mains):
             knightsheet.insert_row("", index=TotalRowCount)
             knightsheet.update_cell(TotalRowCount, 1, name)
             counter = 0
-            for cell in range(2,6):
+            for cell in range(2,2+len(mains)):
                 knightsheet.update_cell(TotalRowCount,cell,mains[counter])
                 if counter != len(mains):
                     counter += 1
