@@ -243,22 +243,11 @@ async def on_message(message):
            todaydate = todaydate.split("-")
            joindate = datetime.date(int(joindate[0]),int(joindate[1]),int(joindate[2]))
            difference = todaydate - joindate
-           
-            
-           if str(discord.utils.get(message.author.roles, name = "Recruit")) != "None":
-               if joindate[0] == todaydate[0]:
-                   if joindate[1] == todaydate[1] and :
-                       if difference >= 7:
-                           await discordclient.remove_roles(message.author, discord.utils.get(message.server.roles, name="Recruit"))
-                           await discordclient.add_roles(message.author, discord.utils.get(message.server.roles, name="Man At Arms"))
-                           await discordclient.send_message(message.channel,"Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
-                       else:
-                           await discordclient.send_message(message.channel,"You joined "+JoinDate2+". You must wait "+str(7-difference)+" days before you can become a Man At Arms. #SorryNotSorry")
-                   else:
-                       await discordclient.remove_roles(message.author, discord.utils.get(server.roles, name="Recruit"))
-                       await discordclient.add_roles(message.author, discord.utils.get(server.roles, name="Man At Arms"))
-                       await discordclient.send_message(message.channel, "Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
+           if difference >= 7:
+               await discordclient.remove_roles(message.author, discord.utils.get(message.server.roles, name="Recruit"))
+               await discordclient.add_roles(message.author, discord.utils.get(message.server.roles, name="Man At Arms"))
+               await discordclient.send_message(message.channel,"Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
            else:
-               await discordclient.send_message(message.channel,"You're not a recruit.")
+               await discordclient.send_message(message.channel,"You joined "+JoinDate2+". You must wait "+str(7-difference)+" days before you can become a Man At Arms. #SorryNotSorry")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
