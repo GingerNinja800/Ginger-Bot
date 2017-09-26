@@ -205,12 +205,17 @@ async def on_message(message):
         elif message.content.startswith("!AddMe"):
            username += "#" + message.author.discriminator
            discrim = message.author.discriminator
+           AcceptMains = ["Warden","Conqueror","Peacekeeper","Lawbringer","Centurion","Gladiator","Raider","Warlord","Berzerker","Valkyrie","Highlander","Kensei","Shugoki","Orochi","Nobushi","Shinobi"]
            ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
            ManAtArms = str(ManAtArms)
            Knight = discord.utils.get(message.author.roles, name="Knight")
            Knight = str(Knight)
            mains = message.content.split(" ")
            mains.remove(mains[0])
+           for main in mains:
+                if main not in AcceptMains or (main.title() not in ["True","False"] and main not in ["N/A"]):
+                    mains.remove[main]
+                    
 
            if ManAtArms != "None":
                none = AddToSheet(username, ManAtArms, discrim,mains)
