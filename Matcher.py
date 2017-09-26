@@ -214,7 +214,7 @@ async def on_message(message):
            mains.remove(mains[0])
            for main in mains:
                 if main not in AcceptMains or (main.title() not in ["True","False"] and main not in ["N/A"]):
-                    mains.remove[main]
+                    mains.remove[mains[main]]
                     
 
            if ManAtArms != "None":
