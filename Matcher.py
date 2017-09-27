@@ -240,6 +240,10 @@ def Squiring(Finding,squiring,discrim):
             knightsheet.update_cell(Row,2,squiring)
             return
 
+def next_available_row(worksheet,column):
+    str_list = list(filter(None, worksheet.col_values(column)))
+    return str(len(str_list)+1)
+
 @discordclient.event
 async def on_message(message):
     if message.author.name != "Ginger Bot":
@@ -343,5 +347,52 @@ async def on_message(message):
             mains = FindMains(role,discrim)
             if mains != None:
                 await discordclient.send_message(message.channel,"Your current mains are: "+" ".join(mains))
+       
+        elif message.content.startswith("!UpdateMemberList"):
+            Roles = ["Recruit","Man At Arms","Squire","Knight","Cavalry","Bannerman","Under-Marshal","Marshal"]
+            scope = ["https://spreadsheets.google.com/feeds"]
+            creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
+            client = gspread.authorize(creds)
+            DawnPCSheet = client.open("Dawn PC Members").sheet1
+            if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander":
+                await discordclient.send_message(message.channel, "Knight commanders only for this command, sorry lads")
+            else:
+                for person in discordclient.get_all_members():
+                    for rank in Roles:
+                        if str(discord.utils.get(person.roles, name= rank)) == "Recruit":
+                            Row = next_available_row(DawnPCSheet,1)
+                            DawnPCSheet.update_acell("A{}".format(Row),str(person))
+                        elif str(discord.utils.get(person.roles, name=rank)) == "Man At Arms":
+                            Row = next_available_row(DawnPCSheet, 2)
+                            DawnPCSheet.update_acell("B{}".format(Row),str(person))
+                        elif str(discord.utils.get(person.roles, name=rank)) == "Squire":
+                            Row = next_available_row(DawnPCSheet, 3)
+                            DawnPCSheet.update_acell("C{}".format(Row),str(person))
+
+                        elif str(discord.utils.get(person.roles, name=rank)) == "Knight":
+                            Row = next_available_row(DawnPCSheet, 4)
+                            DawnPCSheet.update_acell("D{}".format(Row), str(person))
+
+                            if str(discord.utils.get(person.roles, name=rank)) == "Cavalry":
+                                Row = next_available_row(DawnPCSheet, 6)
+                                DawnPCSheet.update_acell("F{}".format(Row), str(person))
+
+                            elif str(discord.utils.get(person.roles, name=rank)) == "None":
+                                Row = next_available_row(DawnPCSheet, 5)
+                                DawnPCSheet.update_acell("E{}".format(Row), str(person))
+
+                            elif str(discord.utils.get(person.roles, name=rank)) == "Bannerman":
+                                Row = next_available_row(DawnPCSheet, 7)
+                                DawnPCSheet.update_acell("G{}".format(Row), str(person))
+
+                            elif str(discord.utils.get(person.roles, name=rank)) == "Under-Marshal":
+                                Row = next_available_row(DawnPCSheet, 8)
+                                DawnPCSheet.update_acell("H{}".format(Row), str(person))
+
+                            elif str(discord.utils.get(person.roles, name=rank)) == "Marshal":
+                                Row = next_available_row(DawnPCSheet, 9)
+                                DawnPCSheet.update_acell("I{}".format(Row), str(person))
+
+            await discordclient.send_message(message.channel,"All Members added.")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
