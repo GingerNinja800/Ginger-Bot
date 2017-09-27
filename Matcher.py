@@ -244,6 +244,26 @@ def next_available_row(worksheet,column):
     str_list = list(filter(None, worksheet.col_values(column)))
     return str(len(str_list)+1)
 
+def FindMains(role,discrim):
+    knightsheet, maasheet = AccessSheet()
+    if role == "Man At Arms":
+        Row = FindMe(maasheet,discrim)
+        if Row == None:
+            return
+        else:
+            RowValues = maasheet.row_values(Row)
+            RowValues = RowValues[2:]
+            return RowValues
+
+    elif role == "Knight":
+        Row = FindMe(knightsheet,discrim)
+        if Row == None:
+            return
+        else:
+            RowValues = knightsheet.row_values(Row)
+            RowValues = RowValues[2:]
+            return RowValues
+
 @discordclient.event
 async def on_message(message):
     if message.author.name != "Ginger Bot":
