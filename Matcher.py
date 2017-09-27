@@ -363,36 +363,36 @@ async def on_message(message):
                             if str(discord.utils.get(person.roles, name= rank)) == "Recruit":
                                 Row = next_available_row(DawnPCSheet,1)
                                 DawnPCSheet.update_acell("A{}".format(Row),str(person))
-                            elif str(discord.utils.get(person.roles, name=rank)) == "Man At Arms":
+                            if str(discord.utils.get(person.roles, name=rank)) == "Man At Arms":
                                 Row = next_available_row(DawnPCSheet, 2)
                                 DawnPCSheet.update_acell("B{}".format(Row),str(person))
-                            elif str(discord.utils.get(person.roles, name=rank)) == "Squire":
+                            if str(discord.utils.get(person.roles, name=rank)) == "Squire":
                                 Row = next_available_row(DawnPCSheet, 3)
                                 DawnPCSheet.update_acell("C{}".format(Row),str(person))
 
-                            elif str(discord.utils.get(person.roles, name=rank)) == "Knight":
+                            if str(discord.utils.get(person.roles, name=rank)) == "Knight":
                                 Row = next_available_row(DawnPCSheet, 4)
                                 DawnPCSheet.update_acell("D{}".format(Row), str(person))
 
-                                if str(discord.utils.get(person.roles, name=rank)) == "Cavalry":
-                                    Row = next_available_row(DawnPCSheet, 6)
-                                    DawnPCSheet.update_acell("F{}".format(Row), str(person))
+                            if str(discord.utils.get(person.roles, name=rank)) == "Cavalry":
+                                Row = next_available_row(DawnPCSheet, 6)
+                                DawnPCSheet.update_acell("F{}".format(Row), str(person))
 
-                                if str(discord.utils.get(person.roles, name=rank)) == "None":
-                                    Row = next_available_row(DawnPCSheet, 5)
-                                    DawnPCSheet.update_acell("E{}".format(Row), str(person))
+                            if str(discord.utils.get(person.roles, name=rank)) == "None":
+                                Row = next_available_row(DawnPCSheet, 5)
+                                DawnPCSheet.update_acell("E{}".format(Row), str(person))
 
-                                if str(discord.utils.get(person.roles, name=rank)) == "Bannerman":
-                                    Row = next_available_row(DawnPCSheet, 7)
-                                    DawnPCSheet.update_acell("G{}".format(Row), str(person))
+                            if str(discord.utils.get(person.roles, name=rank)) == "Bannerman":
+                                Row = next_available_row(DawnPCSheet, 7)
+                                DawnPCSheet.update_acell("G{}".format(Row), str(person))
 
-                                if str(discord.utils.get(person.roles, name=rank)) == "Under-Marshal":
-                                    Row = next_available_row(DawnPCSheet, 8)
-                                    DawnPCSheet.update_acell("H{}".format(Row), str(person))
+                            if str(discord.utils.get(person.roles, name=rank)) == "Under-Marshal":
+                                Row = next_available_row(DawnPCSheet, 8)
+                                DawnPCSheet.update_acell("H{}".format(Row), str(person))
 
-                                if str(discord.utils.get(person.roles, name=rank)) == "Marshal":
-                                    Row = next_available_row(DawnPCSheet, 9)
-                                    DawnPCSheet.update_acell("I{}".format(Row), str(person))
+                            if str(discord.utils.get(person.roles, name=rank)) == "Marshal":
+                                Row = next_available_row(DawnPCSheet, 9)
+                                DawnPCSheet.update_acell("I{}".format(Row), str(person))
 
             await discordclient.send_message(message.channel,"All Members added.")
 
