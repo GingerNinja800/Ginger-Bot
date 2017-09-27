@@ -378,7 +378,7 @@ async def on_message(message):
                                 Row = next_available_row(DawnPCSheet, 6)
                                 DawnPCSheet.update_acell("F{}".format(Row), str(person))
 
-                            if str(discord.utils.get(person.roles, name=rank)) == "None":
+                            if str(discord.utils.get(person.roles, name="Cavalry")) == "None" and str(discord.utils.get(person.roles, name=rank)) == "Knight":
                                 Row = next_available_row(DawnPCSheet, 5)
                                 DawnPCSheet.update_acell("E{}".format(Row), str(person))
 
