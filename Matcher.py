@@ -378,19 +378,19 @@ async def on_message(message):
                                     Row = next_available_row(DawnPCSheet, 6)
                                     DawnPCSheet.update_acell("F{}".format(Row), str(person))
 
-                                elif str(discord.utils.get(person.roles, name=rank)) == "None":
+                                if str(discord.utils.get(person.roles, name=rank)) == "None":
                                     Row = next_available_row(DawnPCSheet, 5)
                                     DawnPCSheet.update_acell("E{}".format(Row), str(person))
 
-                                elif str(discord.utils.get(person.roles, name=rank)) == "Bannerman":
+                                if str(discord.utils.get(person.roles, name=rank)) == "Bannerman":
                                     Row = next_available_row(DawnPCSheet, 7)
                                     DawnPCSheet.update_acell("G{}".format(Row), str(person))
 
-                                elif str(discord.utils.get(person.roles, name=rank)) == "Under-Marshal":
+                                if str(discord.utils.get(person.roles, name=rank)) == "Under-Marshal":
                                     Row = next_available_row(DawnPCSheet, 8)
                                     DawnPCSheet.update_acell("H{}".format(Row), str(person))
 
-                                elif str(discord.utils.get(person.roles, name=rank)) == "Marshal":
+                                if str(discord.utils.get(person.roles, name=rank)) == "Marshal":
                                     Row = next_available_row(DawnPCSheet, 9)
                                     DawnPCSheet.update_acell("I{}".format(Row), str(person))
 
