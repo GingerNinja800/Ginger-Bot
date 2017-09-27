@@ -331,5 +331,17 @@ async def on_message(message):
                 elif finding == "?":
                     squireless = Squiring(finding,"",discrim)
                     await discordclient.send_message(message.channel, "You're current status is: "+squireless)
+         
+        elif message.content.startswith("?Mains"):
+            role = str(discord.utils.get(message.author.roles,name = "Man At Arms"))
+            if role == 'None':
+                role = str(discord.utils.get(message.author.roles, name = "Knight"))
+                if role == 'None':
+                    await discordclient.send_message(message.channel, "This command is only available to Man At Arms and Knights, sorry")
+
+
+            mains = FindMains(role,discrim)
+            if mains != None:
+                await discordclient.send_message(message.channel,"Your current mains are: "+" ".join(mains))
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
