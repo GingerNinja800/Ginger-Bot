@@ -261,7 +261,7 @@ def FindMains(role,discrim):
             return
         else:
             RowValues = knightsheet.row_values(Row)
-            RowValues = RowValues[2:]
+            RowValues = RowValues[1:]
             return RowValues
 
 @discordclient.event
