@@ -252,7 +252,7 @@ def FindMains(role,discrim):
             return
         else:
             RowValues = maasheet.row_values(Row)
-            RowValues = RowValues[2:]
+            RowValues = RowValues[1:]
             return RowValues
 
     elif role == "Knight":
