@@ -373,7 +373,7 @@ async def on_message(message):
             scope = ["https://spreadsheets.google.com/feeds"]
             creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
             client = gspread.authorize(creds)
-            DawnPCSheet = client.open("Dawn PC Members").sheet1
+            DawnPCSheet = client.open("The Holy Sepulchre Members").sheet1
             if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander":
                 await discordclient.send_message(message.channel, "Knight commanders only for this command, sorry lads")
             else:
