@@ -374,8 +374,8 @@ async def on_message(message):
             creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
             client = gspread.authorize(creds)
             DawnPCSheet = client.open("The Holy Sepulchre Members").sheet1
-            if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander":
-                await discordclient.send_message(message.channel, "Knight commanders only for this command, sorry lads")
+            if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander" or str(discord.utils.get(message.author.roles,name = "Templar Commander")) != "Templar Commander":
+                await discordclient.send_message(message.channel, "Leadership only for this command, sorry lads")
             else:
                 for person in discordclient.get_all_members():
                     if str(discord.utils.get(person.roles, name= "Dawn PC")) == "Dawn PC":
