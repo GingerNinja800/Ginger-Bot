@@ -82,9 +82,9 @@ def FindKnight(username):
         for loop in range(1, 5):
             for Knight in knightdata:
                 Knight = list(Knight.values())
-                if Knight[1] == "TRUE":
+                if Knight[4] == "TRUE":
                     if Main == Knight[loop]:
-                        Canditates[Knight[0]] = Knight[2:]
+                        Canditates[Knight[0]] = Knight[1:4]
 
     Matches = {}
     for canditate in Canditates:
@@ -166,7 +166,7 @@ def Squiring(Finding,squiring,discrim):
             else:
                 return
         elif not Finding:
-            knightsheet.update_cell(Row,2,squiring)
+            knightsheet.update_cell(Row,5,squiring)
             return
 
 
