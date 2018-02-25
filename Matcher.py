@@ -378,7 +378,7 @@ async def on_message(message):
                 await discordclient.send_message(message.channel, "Leadership only for this command, sorry lads")
             else:
                 for person in discordclient.get_all_members():
-                    if str(discord.utils.get(person.roles, name= "Dawn PC")) == "Dawn PC":
+                    if str(discord.utils.get(person.roles, name= "FH Dawn PC")) == "FH Dawn PC":
                         for rank in Roles:
                             if str(discord.utils.get(person.roles, name= rank)) == "Recruit":
                                 Row = next_available_row(DawnPCSheet,1)
