@@ -266,7 +266,7 @@ async def on_message(message):
                                                      "Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the Squire program")
                 else:
                     await discordclient.send_message(message.channel,
-                                                     "You joined " + JoinDate2 + ". You must wait " + 7-int(difference) + " days before you can become a Man At Arms. #SorryNotSorry")
+                                                     "You joined " + JoinDate2 + ". You must wait " + str(7-int(difference)) + " days before you can become a Man At Arms. #SorryNotSorry")
 
             elif str(discord.utils.get(message.author.roles, name = "Knight")) == "Knight":
                 Done = TransferData(username,discrim)
