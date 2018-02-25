@@ -109,107 +109,6 @@ def FindMe(sheet,discrim):
         return
 
 def AddToSheet(name, sheet, discrim, mains):
-    """
-    knightsheet, maasheet = AccessSheet()
-    if role == "Man At Arms":
-        try:
-            if len(mains) > 0:
-                ColA = maasheet.col_values(1)
-                ColA.remove(ColA[0])
-                for cell in ColA:
-                    cell2 = cell.split("#")
-                    if discrim in cell2[1]:
-                        Row = ColA.index(cell)
-                        Row += 2
-                        break
-
-                counter = 0
-                maasheet.update_cell(Row, 1, name)
-                for cell in range(2, 2 + len(mains)):
-                    maasheet.update_cell(Row, cell, mains[counter])
-                    if counter != len(mains):
-                        counter += 1
-                return "1"
-            else:
-                ColA = maasheet.col_values(1)
-                ColA.remove(ColA[0])
-                for cell in ColA:
-                    cell2 = cell.split("#")
-                    if discrim in cell2[1]:
-                        Row = ColA.index(cell)
-                        Row += 2
-                        break
-                return
-
-        except:
-            if len(mains) > 0:
-                TotalRowCount = (maasheet.row_count) + 1
-                maasheet.insert_row("", index=TotalRowCount)
-                maasheet.update_cell(TotalRowCount, 1, name)
-                counter = 0
-                for cell in range(2, 2 + len(mains)):
-                    maasheet.update_cell(TotalRowCount, cell, mains[counter])
-                    counter += 1
-                return "1"
-            else:
-                TotalRowCount = (maasheet.row_count) + 1
-                maasheet.insert_row("", index=TotalRowCount)
-                maasheet.update_cell(TotalRowCount, 1, name)
-                return "1"
-
-    elif role == "Knight":
-        try:
-            if len(mains) > 0:
-                ColA = knightsheet.col_values(1)
-                ColA.remove(ColA[0])
-                for cell in ColA:
-                    cell2 = cell.split("#")
-                    if discrim in cell2[1]:
-                        Row = ColA.index(cell)
-                        Row += 2
-                        break
-
-                counter = 0
-                knightsheet.update_cell(Row, 1, name)
-                for cell in range(3, 3 + len(mains)):
-                    knightsheet.update_cell(Row, cell, mains[counter])
-                    if counter != len(mains):
-                        counter += 1
-                return "1"
-            else:
-                ColA = knightsheet.col_values(1)
-                ColA.remove(ColA[0])
-                for cell in ColA:
-                    cell2 = cell.split("#")
-                    if discrim in cell2[1]:
-                        Row = ColA.index(cell)
-                        Row += 2
-                        break
-                print(Row)
-                return
-
-        except:
-            if len(mains) > 0:
-                TotalRowCount = (knightsheet.row_count) + 1
-                knightsheet.insert_row("", index=TotalRowCount)
-                knightsheet.update_cell(TotalRowCount, 1, name)
-                counter = 0
-                for cell in range(3, 3 + len(mains)):
-                    knightsheet.update_cell(TotalRowCount, cell, mains[counter])
-                    if counter != len(mains):
-                        counter += 1
-                return "1"
-            else:
-                TotalRowCount = (knightsheet.row_count) + 1
-                knightsheet.insert_row("", index=TotalRowCount)
-                knightsheet.update_cell(TotalRowCount, 1, name)
-                return "1"
-    else:
-        return
-
-
-    """
-
     present, row = InSheet(sheet,discrim)
     if present:
         if len(mains) == 0:
@@ -424,7 +323,7 @@ async def on_message(message):
                 await discordclient.send_message(message.channel, "Leadership only for this command, sorry lads")
             else:
                 for person in discordclient.get_all_members():
-                    if str(discord.utils.get(person.roles, name= "Dawn PC")) == "Dawn PC":
+                    if str(discord.utils.get(person.roles, name= "FH Dawn PC")) == "FH Dawn PC":
                         for rank in Roles:
                             if str(discord.utils.get(person.roles, name= rank)) == "Recruit":
                                 Row = next_available_row(DawnPCSheet,1)
