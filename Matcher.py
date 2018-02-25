@@ -15,15 +15,15 @@ async def on_ready():
     print(discordclient.user.name)
     print(discordclient.user.id)
     print("-------")
-    await discordclient.change_presence(game=discord.Game(name="Type >>Help"))
+    #await discordclient.change_presence(game=discord.Game(name="Type >>Help"))
 
 
 def AccessSheet():
     scope = ["https://spreadsheets.google.com/feeds"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
     client = gspread.authorize(creds)
-    knightsheet = client.open("DawnPC Knights").sheet1
-    maasheet = client.open("DawnPC Man At Arms").sheet1
+    knightsheet = client.open("THS Members").sheet3
+    maasheet = client.open("THS Members").sheet2
     return knightsheet, maasheet
 
 
@@ -373,8 +373,8 @@ async def on_message(message):
             scope = ["https://spreadsheets.google.com/feeds"]
             creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
             client = gspread.authorize(creds)
-            DawnPCSheet = client.open("The Holy Sepulchre Members").sheet1
-            if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander" or str(discord.utils.get(message.author.roles,name = "Templar Commander")) != "Templar Commander":
+            DawnPCSheet = client.open("THS Members").sheet1
+            if str(discord.utils.get(message.author.roles,name = "Dawn Knight Commander")) != "Dawn Knight Commander":
                 await discordclient.send_message(message.channel, "Leadership only for this command, sorry lads")
             else:
                 for person in discordclient.get_all_members():
@@ -414,6 +414,7 @@ async def on_message(message):
                                 Row = next_available_row(DawnPCSheet, 9)
                                 DawnPCSheet.update_acell("I{}".format(Row), str(person))
 
-            await discordclient.send_message(message.channel,"All Members added.")
+                await discordclient.send_message(message.channel,"All Members added.")
 
 discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
+#discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
