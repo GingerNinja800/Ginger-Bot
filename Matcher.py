@@ -22,8 +22,8 @@ def AccessSheet():
     scope = ["https://spreadsheets.google.com/feeds"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("client_secret.json", scope)
     client = gspread.authorize(creds)
-    knightsheet = client.open("THS Members").sheet3
-    maasheet = client.open("THS Members").sheet2
+    knightsheet = client.open("THS Members").get_worksheet(2)
+    maasheet = client.open("THS Members").get_worksheet(1)
     return knightsheet, maasheet
 
 
@@ -108,7 +108,8 @@ def FindMe(sheet,discrim):
     except:
         return
 
-def AddToSheet(name, role, discrim, mains):
+def AddToSheet(name, sheet, discrim, mains):
+    """
     knightsheet, maasheet = AccessSheet()
     if role == "Man At Arms":
         try:
@@ -206,6 +207,48 @@ def AddToSheet(name, role, discrim, mains):
     else:
         return
 
+
+    """
+
+    present, row = InSheet(sheet,discrim)
+    if present:
+        if len(mains) == 0:
+            return
+        else:
+            counter = 2
+            for main in mains:
+                sheet.update_cell(row,counter,main)
+                counter += 1
+                if counter > 4:
+                    break
+            return "1"
+
+    else:
+        Row = sheet.row_count + 1
+        sheet.insert_row("",index=Row)
+        sheet.update_cell(Row,1,name)
+        if len(mains) == 0:
+            return "1"
+        else:
+            counter = 2
+            for main in mains:
+                sheet.update_cell(row, counter, main)
+                counter += 1
+                if counter > 4:
+                    break
+            return "1"
+
+
+def InSheet(sheet,discrim):
+    TagCol = sheet.col_values(1)
+    for Tag in TagCol[1:]:
+        row = TagCol.index(Tag) + 1
+        if discrim in Tag:
+            return True, row
+    return False, None
+
+
+
 def TransferData(name,discrim):
     knightsheet, maasheet = AccessSheet()
     Row = FindMe(maasheet,discrim)
@@ -290,25 +333,28 @@ async def on_message(message):
             username += "#" + message.author.discriminator
             AcceptMains = ["True", "False", "Warden", "Conqueror", "Peacekeeper", "Lawbringer", "Centurion",
                            "Gladiator", "Raider", "Warlord", "Berzerker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
-                           "Orochi", "Nobushi", "Shinobi"]
-            ManAtArms = discord.utils.get(message.author.roles, name="Man At Arms")
-            ManAtArms = str(ManAtArms)
-            Knight = discord.utils.get(message.author.roles, name="Knight")
-            Knight = str(Knight)
+                           "Orochi", "Nobushi", "Shinobi","Shaman","Aramusha"]
+
+
+
+
+
             mains = message.content.split(" ")
             mains.remove(mains[0])
             validated = []
             for pos in range(len(mains)):
-                if (mains[pos].title() in AcceptMains):
-                    if mains[pos] in AcceptMains[2:]:
-                        validated.append(mains[pos])
+                if (mains[pos].title() in AcceptMains[2:]):
+                    validated.append(mains[pos])
 
             mains = validated
 
-            if ManAtArms != "None":
-                none = AddToSheet(username, ManAtArms, discrim, mains)
-            elif Knight != "None":
-                none = AddToSheet(username, Knight, discrim, mains)
+            knightsheet, maasheet = AccessSheet()
+
+            if discord.utils.get(message.author.roles, name = "Man At Arms") == "Man At Arms":
+                none = AddToSheet(username, maasheet, discrim, mains)
+            else:
+                none = AddToSheet(username, knightsheet, discrim, mains)
+
             if none == None:
                 await discordclient.send_message(message.channel, "You're already in the spreadsheet.")
             else:
@@ -378,7 +424,7 @@ async def on_message(message):
                 await discordclient.send_message(message.channel, "Leadership only for this command, sorry lads")
             else:
                 for person in discordclient.get_all_members():
-                    if str(discord.utils.get(person.roles, name= "FH Dawn PC")) == "FH Dawn PC":
+                    if str(discord.utils.get(person.roles, name= "Dawn PC")) == "Dawn PC":
                         for rank in Roles:
                             if str(discord.utils.get(person.roles, name= rank)) == "Recruit":
                                 Row = next_available_row(DawnPCSheet,1)
@@ -416,5 +462,5 @@ async def on_message(message):
 
                 await discordclient.send_message(message.channel,"All Members added.")
 
-discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
-#discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
+#discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
+discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
