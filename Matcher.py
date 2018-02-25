@@ -94,20 +94,6 @@ def FindKnight(username):
 
     return (KnightTeacher)
 
-
-def FindMe(sheet,discrim):
-    ColA = sheet.col_values(1)
-    ColA.remove(ColA[0])
-    for cell in ColA:
-        cell2 = cell.split("#")
-        if discrim in cell2[1]:
-            Row = ColA.index(cell)
-            Row += 2
-    try:
-        return Row
-    except:
-        return
-
 def AddToSheet(name, sheet, discrim, mains):
     present, row = InSheet(sheet,discrim)
     if present:
@@ -171,16 +157,18 @@ def TransferData(name,discrim):
 
 
 def Squiring(Finding,squiring,discrim):
-        knightsheet, maasheet = AccessSheet()
-        Row = FindMe(knightsheet,discrim)
-        if Finding == "?":
-            if Row == None:
-                return
-            else:
+        knightsheet, __ = AccessSheet()
+        present , Row = InSheet(knightsheet,discrim)
+        if Finding:
+            present, row = InSheet(knightsheet,discrim)
+            if present:
                 return (knightsheet.row_values(Row)[1])
-        elif Finding == "!":
+            else:
+                return
+        elif not Finding:
             knightsheet.update_cell(Row,2,squiring)
             return
+
 
 def next_available_row(worksheet,column):
     str_list = list(filter(None, worksheet.col_values(column)))
@@ -231,7 +219,7 @@ async def on_message(message):
         elif message.content.startswith("!AddMe"):
             username += "#" + message.author.discriminator
             AcceptMains = ["True", "False", "Warden", "Conqueror", "Peacekeeper", "Lawbringer", "Centurion",
-                           "Gladiator", "Raider", "Warlord", "Berzerker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
+                           "Gladiator", "Raider", "Warlord", "berserker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
                            "Orochi", "Nobushi", "Shinobi","Shaman","Aramusha"]
 
 
@@ -270,12 +258,12 @@ async def on_message(message):
                 print(joindate)
                 difference = str(todaydate - joindate).split()[0]
                 if int(difference)-7 >= 0:
-                    ManAtArmsRole = discord.utils.get(message.server.roles, name="Man At Arms")
-                    RecruitRole = discord.utils.get(message.server.roles, name="Recruit")
-                    await discordclient.remove_roles(message.author, RecruitRole)
-                    await discordclient.add_roles(message.author, ManAtArmsRole)
+                    UserRoles = message.author.roles
+                    RecruitPos = UserRoles.index(discord.utils.get(message.server.roles, name = "Recruit"))
+                    UserRoles[RecruitPos] = discord.utils.get(message.server.roles,name = "Man At Arms")
+                    await discordclient.replace_roles(message.author,*UserRoles)
                     await discordclient.send_message(message.channel,
-                                                     "Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the database to aid in squiring")
+                                                     "Congratulations, you're now a Man At Arms. Do !AddMe to add yourself to the Squire program")
                 else:
                     await discordclient.send_message(message.channel,
                                                      "You joined " + JoinDate2 + ". You must wait " + 7-int(difference) + " days before you can become a Man At Arms. #SorryNotSorry")
@@ -295,10 +283,10 @@ async def on_message(message):
                     userinput.remove(userinput[0])
                     if userinput[0].title() in ["True","False","N/A"]:
                         squiring = userinput[0].title()
-                        Squiring(finding,squiring,discrim)
-                        await discordclient.send_message(message.channel, "Done.")
+                        Squiring(False,squiring,discrim)
+                        await discordclient.send_message(message.channel, "Change Made.")
                 elif finding == "?":
-                    squireless = Squiring(finding,"",discrim)
+                    squireless = Squiring(True,None,discrim)
                     await discordclient.send_message(message.channel, "You're current status is: "+squireless)
          
         elif message.content.startswith("?Mains"):
@@ -307,8 +295,6 @@ async def on_message(message):
                 role = str(discord.utils.get(message.author.roles, name = "Knight"))
                 if role == 'None':
                     await discordclient.send_message(message.channel, "This command is only available to Man At Arms and Knights, sorry")
-
-
             mains = FindMains(role,discrim)
             if mains != None:
                 await discordclient.send_message(message.channel,"Your current mains are: "+" ".join(mains))
@@ -361,5 +347,5 @@ async def on_message(message):
 
                 await discordclient.send_message(message.channel,"All Members added.")
 
-#discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
-discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
+discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
+#discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
