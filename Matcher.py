@@ -219,12 +219,8 @@ async def on_message(message):
         elif message.content.startswith("!AddMe"):
             username += "#" + message.author.discriminator
             AcceptMains = ["True", "False", "Warden", "Conqueror", "Peacekeeper", "Lawbringer", "Centurion",
-                           "Gladiator", "Raider", "Warlord", "berserker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
+                           "Gladiator", "Raider", "Warlord", "Berserker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
                            "Orochi", "Nobushi", "Shinobi","Shaman","Aramusha"]
-
-
-
-
 
             mains = message.content.split(" ")
             mains.remove(mains[0])
@@ -274,7 +270,16 @@ async def on_message(message):
                     await discordclient.send_message(message.channel, "You've been transferred to the Knight sheet. Remember to add whether or not you're available to squire")
                 elif Done == None:
                     await discordclient.send_message(message.channel, "Error: You're most likely not in the MaA sheet, so just use !AddMe to add yourself to knight sheet if not already there.")
-
+                    
+        elif message.content.startswith("?Heroes"):
+            AcceptMains = ["Warden", "Conqueror", "Peacekeeper", "Lawbringer", "Centurion",
+                           "Gladiator", "Raider", "Warlord", "Berserker", "Valkyrie", "Highlander", "Kensei", "Shugoki",
+                           "Orochi", "Nobushi", "Shinobi","Shaman","Aramusha"]
+            herolist = ""
+            for main in AcceptMains:
+                herolist += main+", "
+            await discordclient.send_message(message.channel, herolist)
+            
         elif message.content.startswith("!Squiring") or message.content.startswith("?Squiring"):
             if str(discord.utils.get(message.author.roles, name = "Knight")) == "Knight":
                 userinput = message.content.split(" ")
