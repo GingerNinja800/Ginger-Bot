@@ -352,5 +352,5 @@ async def on_message(message):
 
                 await discordclient.send_message(message.channel,"All Members added.")
 
-discordclient.run('MzM2MTI4OTc3MzA1NDY4OTI4.DIR5cA.SVdKgvWIgkqw2zzTtyrL9RBAB54')
-#discordclient.run("MzE1NDc3NzU5NjA0NTU1Nzg2.DXOSoQ.G2F7LlhxEzyoq06Ft7G73e-aI8c")
+)
+
